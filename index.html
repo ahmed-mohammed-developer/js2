@@ -1,0 +1,187 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- يجعل عرض الصفحة مناسبًا لشاشات الجوال والكمبيوتر -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>شريط الصور</title>
+
+    <!-- ربط ملف التنسيق بصفحة HTML -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- تشغيل JavaScript بعد تحليل HTML -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <!-- منطقة شريط الصور -->
+        <section
+            class="carousel"
+            data-carousel
+            role="region"
+            aria-roledescription="عرض الشرائح"
+            aria-label="العروض الرئيسية"
+        >
+            <!-- الشريحة الأولى -->
+            <article
+                class="carousel_slide is-active"
+                data-slide
+                aria-roledescription="شريحة"
+                aria-label="شريحة 1 من 3"
+                aria-hidden="false"
+            >
+                <img
+                    src="1.svg"
+                    alt="بحيرة هادئة بين الجبال"
+                    class="carousel_image"
+                >
+
+                <div class="carousel_content">
+                    <p class="carousel_eyebrow">اكتشف الطبيعة</p>
+                    <h1>رحلتك القادمة تبدأ من هنا</h1>
+                    <p>أماكن جديدة وتجارب تستحق أن تعيشها.</p>
+
+                    <a href="#highlights" class="carousel_link">
+                        اكتشف المزيد
+                    </a>
+                </div>
+            </article>
+
+            <!-- الشريحة الثانية -->
+            <article
+                class="carousel_slide"
+                data-slide
+                aria-roledescription="شريحة"
+                aria-label="شريحة 2 من 3"
+                aria-hidden="true"
+            >
+                <img
+                    src="2.svg"
+                    alt="جبال واسعة تحت سماء صافية"
+                    class="carousel_image"
+                >
+
+                <div class="carousel_content">
+                    <p class="carousel_eyebrow">مساحات مفتوحة</p>
+                    <h2>غيّر مشهد يومك</h2>
+                    <p>اختر وجهة تمنحك وقتًا للاكتشاف والاسترخاء.</p>
+
+                    <a href="#highlights" class="carousel_link">
+                        اكتشف المزيد
+                    </a>
+                </div>
+            </article>
+
+            <!-- الشريحة الثالثة -->
+            <article
+                class="carousel_slide"
+                data-slide
+                aria-roledescription="شريحة"
+                aria-label="شريحة 3 من 3"
+                aria-hidden="true"
+            >
+                <img
+                    src="3.svg"
+                    alt="جبال وبحيرة في ضوء الغروب"
+                    class="carousel_image"
+                >
+
+                <div class="carousel_content">
+                    <p class="carousel_eyebrow">لحظات لا تُنسى</p>
+                    <h2>استمتع بكل خطوة</h2>
+                    <p>ابدأ التخطيط لرحلتك القادمة اليوم.</p>
+
+                    <a href="#highlights" class="carousel_link">
+                        اكتشف المزيد
+                    </a>
+                </div>
+            </article>
+
+            <!-- أدوات التحكم بين الشرائح -->
+            <div
+                class="carousel_controls"
+                role="group"
+                aria-label="أدوات التحكم بالصور"
+            >
+                <!-- زر الشريحة السابقة -->
+                <button
+                    class="carousel_button"
+                    type="button"
+                    data-action="previous"
+                    aria-label="عرض الشريحة السابقة"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M19 12H5" />
+                        <path d="m12 5-7 7 7 7" />
+                    </svg>
+                </button>
+
+                <!-- ينشئ JavaScript نقاط التنقل هنا -->
+                <div
+                    class="carousel_dots"
+                    data-dots
+                    role="group"
+                    aria-label="اختيار صورة"
+                ></div>
+
+                <!-- زر الشريحة التالية -->
+                <button
+                    class="carousel_button"
+                    type="button"
+                    data-action="next"
+                    aria-label="عرض الشريحة التالية"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- زر إيقاف التنقل التلقائي أو تشغيله -->
+                <button
+                    class="carousel_button carousel_button_play"
+                    type="button"
+                    data-action="toggle-autoplay"
+                    aria-label="إيقاف التنقل التلقائي"
+                    aria-pressed="false"
+                >
+                    <span data-play-icon aria-hidden="true">Ⅱ</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- القسم الذي تصل إليه روابط اكتشف المزيد -->
+        <section class="highlights" id="highlights">
+            <h2>اكتشف وجهتك القادمة</h2>
+            <p>يمكنك استبدال هذا القسم بمحتوى موقعك أو عروضك.</p>
+        </section>
+    </main>
+</body>
+</html>
+```

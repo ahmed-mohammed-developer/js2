@@ -1,0 +1,224 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+  font-family: Arial, sans-serif;
+}
+body {
+  color: #ffffff;
+  background-color: #f3f5f4;
+}
+
+/* الحاوية الرئيسية للشريط */
+.carousel {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    height: clamp(440px, 76vh, 760px);
+    overflow: hidden;
+    color: #ffffff;
+   background-color: #172b3a;
+}
+
+/* الشرائح فوق بعضها، وتظهر النشطة بتأثير التلاشي */
+.carousel_slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 600ms ease, visibility 600ms ease;
+}
+.carousel_slide.is-active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+.carousel_slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        rgb(8 20 25 / 72%),
+        rgb(8 20 25 / 34%) 58%,
+        rgb(8 20 25 / 12%)
+    );
+}
+
+/* طبقة داكنة لتسهيل قراءة النص فوق الصور */
+.carousel_image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+/* مساحة النص مع مراعاة مكان أدوات التحكم أسفل الشريحة */
+.carousel_content {
+    width: min(760px, 100%);
+    padding: 48px 10% 112px;
+}
+
+.carousel_eyebrow {
+  color: #c5e4d7;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.carousel_content h1,
+.carousel_content h2 {
+  margin: 12px 0;
+  font-size: clamp(2.2rem, 6vw, 5rem);
+  line-height: 1.2;
+  text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.7);
+}
+
+.carousel_content p {
+  max-width: 580px;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.8;
+  text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.7);
+}
+
+.carousel_link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: #172b3a;
+  background-color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+.carousel_link:hover {
+    background-color: #c5e4d7;
+}
+
+/* أدوات التحكم مثبتة أسفل الشريط */
+.carousel_controls {
+  position: absolute;
+  right: 16px;
+  bottom: 20px;
+  left: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.carousel_button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 55%);
+  border-radius: 50%;
+  color: #ffffff;
+  background: rgb(0 0 0 / 30%);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.carousel_button:hover,
+.carousel_button:focus-visible {
+  color: #172b3a;
+  background-color: #ffffff;
+}
+.carousel_button:focus-visible,
+.carousel_dots:focus-visible,
+.carousel_link:focus-visible {
+    outline: 3px solid #f4cb78;
+  outline-offset: 3px;
+}
+
+/* نقاط الانتقال بين الصور */
+.carousel_dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.carousel__dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 60%);
+  cursor: pointer;
+  transition:
+    width 200ms ease,
+    background-color 200ms ease;
+}
+.carousel__dot[aria-current="true"] {
+  width: 30px;
+  background: #ffffff;
+}
+/* مثال على محتوى الصفحة بعد شريط الصور */
+.highlights {
+  padding: 56px 8%;
+  color: #172b3a;
+  text-align: center;
+}
+/* تعديلات للشاشات الصغيرة */
+@media (max-width: 600px) {
+  .carousel {
+    height: 78vh;
+    min-height: 480px;
+    max-height: 700px;
+  }
+  .carousel_slide::after {
+    background: linear-gradient(
+      0deg,
+      rgb(8 20 25 / 78%),
+      rgb(8 20 25 / 38%) 70%,
+      rgb(8 20 25 / 18%)
+    );
+  }
+  .carousel_content {
+    padding: 32px 7% 112px;
+  }
+  .carousel_content h1,
+  .carousel_content h2 {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+  .carousel_controls {
+    gap: 8px;
+  }
+  .carousel_button {
+    width: 40px;
+    height: 40px;
+  }
+  .carousel_dots {
+    gap: 7px;
+  }
+  .carousel_dot {
+    width: 10px;
+    height: 10px;
+  }
+  .carousel_dot[aria-current="true"] {
+    width: 24px;
+  }
+}
+/* احترام إعداد الجهاز لتقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
