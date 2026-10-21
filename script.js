@@ -28,4 +28,46 @@ slides.forEach((slide, index) => {
     dot.className = "carousel__dot";
     dot.setAttribute("aria-label", `عرض رقم الصورة ${index + 1}`);
     dot.dataset.slideTo = index
-})
+
+      // الضغط على النقطة يعرض الصورة المرتبطة بها
+dot.addEventListener("click", () => {
+    showSlide(index);
+    startTimer();
+});
+
+dotsContainer.append(dot);
+});
+
+const dots = Array.from(dotsContainer.querySelectorAll(".carousel__dot"));
+
+// تعرض هذه الدالة الصورة المطلوبة وتحدّث حالة الروابط وأدوات الوصول
+function showSlide(index) {
+  // تضمن هذه المعادلة العودة إلى أول صورة بعد آخر صورة والعكس
+currentIndex = ((index % slides.length) + slides.length) % slides.length;
+
+slides.forEach((slide, slideIndex) => {
+    const isActive = slideIndex === currentIndex;
+
+    slide.classList.toggle("is-active", isActive);
+    slide.setAttribute("aria-hidden", String(!isActive));
+    // يمنع التركيز بلوحة المفاتيح على روابط الشرائح المخفية
+slide.inert = !isActive;
+});
+
+dots.forEach((dot, dotIndex) => {
+    if (dotIndex === currentIndex) {
+        dot.setAttribute("aria-current", "true")
+    } else {
+        dot.removeAttribute("aria-current");
+    }
+});
+}
+
+// توقف المؤقت الحالي إن كان يعمل
+function stopTimer() {
+    if (timerId !== null) {
+        window.clearInterval(timerId);
+        timerId = null
+    }
+}
+
