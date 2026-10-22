@@ -210,13 +210,16 @@ nextButton.addEventListener("click", () => {
 });
 
 
-// التحكم اليدوي في التشغيل التلقائي
 autoplayButton.addEventListener("click", () => {
     isPaused = !isPaused;
 
-    updateAutoplayButton();
+    // السماح باستئناف التشغيل بعد الضغط على الزر
+    if (!isPaused) {
+        isPointerInside = false;
+        isFocusInside = false;
+    }
 
-    // startTimer يقرر التشغيل بناءً على جميع الشروط
+    updateAutoplayButton();
     startTimer();
 });
 
